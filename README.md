@@ -8,8 +8,8 @@ springboot3.2 + oauth2-authorization-server1.2.7 + jwt + mybaitsplus3.5.10 + mys
 
 # 模块介绍
 
-auth-common 通用模块，包括基础仓库信息、mybatis-plus配置信息、基础工具类等
-auth-server oauth2的授权服务器
+auth-common 通用模块，包括基础仓库信息、mybatis-plus配置信息、基础工具类等  
+auth-server oauth2的授权服务器  
 auth-resource oauth2的资源服务器
 
 # 使用说明
