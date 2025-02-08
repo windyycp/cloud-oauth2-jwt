@@ -24,4 +24,4 @@ auth-resource oauth2的资源服务器
 1. 访问
    http://127.0.0.1:8080/oauth2/authorize?response_type=code&client_id=my-client&scope=openid&redirect_uri=http://127.0.0.1:8080/test/code
 2. 输入用户名和密码（test 123456），点击登录，会自动跳转到http://127.0.0.1:8080/test/code， 该接口已实现token获取，并输出access_token到控制台
-3. 使用第2步的token, header使用 Authorization Bearer {token} 访问 http://localhost:8081/user/info 获取用户信息
+3. 使用第2步的token, header使用 Authorization Bearer {token} 访问 http://127.0.0.1:8081/user/info 获取用户信息
