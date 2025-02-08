@@ -1,0 +1,36 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /
+  tomcat:
+    connection-timeout: 60000
+
+# spring
+spring:
+  application:
+    name: auth-server
+
+  # 数据源
+  datasource:
+    driver-class-name: com.p6spy.engine.spy.P6SpyDriver
+    url: jdbc:p6spy:mysql://172.16.2.47:4000/simple
+    username: root
+    password:
+
+  data:
+    #reids配置
+    redis:
+      host: 172.16.2.47
+      database: 0
+
+# 数据目录设置
+dir:
+  root: ${user.dir}/apps/${spring.application.name} # 应用文件根目录
+  logs: ${dir.root}/logs # 日志文件目录
+
+#日志配置
+logging:
+  file:
+    path: ${dir.logs}
+  level:
+    root: INFO #TRACE
