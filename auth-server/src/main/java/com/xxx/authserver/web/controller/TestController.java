@@ -22,6 +22,11 @@ public class TestController {
     @Autowired
     private RestTemplate restTemplate;
 
+    @RequestMapping("/hello")
+    public String hello() {
+        return "hello";
+    }
+
     /**
      * 通过授权码获取token
      *
@@ -40,6 +45,7 @@ public class TestController {
         param.add("client_id", clientId);
         param.add("client_secret", clientSecret);
         param.add("code", code);
+        param.add("sms_code", "666666"); // 二次认证使用， 非必须
 
         // 设置请求头
         HttpHeaders headers = new HttpHeaders();

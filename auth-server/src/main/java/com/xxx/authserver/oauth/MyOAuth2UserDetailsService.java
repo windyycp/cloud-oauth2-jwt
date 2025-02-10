@@ -11,7 +11,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Component;
 
 @Component
-public class MyUserDetailsService implements UserDetailsService {
+public class MyOAuth2UserDetailsService implements UserDetailsService {
 
     @Autowired
     private SysUserMapper sysUserMapper;
@@ -23,6 +23,10 @@ public class MyUserDetailsService implements UserDetailsService {
                 .password(user.getPassword())
                 .roles("admin")
                 .build();
+    }
+
+    public SysUser loadSysUserByUsername(String username) {
+        return sysUserMapper.selectOne(new LambdaQueryWrapper<SysUser>().eq(SysUser::getUserName, username));
     }
 
 }

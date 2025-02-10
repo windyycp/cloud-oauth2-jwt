@@ -36,7 +36,7 @@ public class MyOAuth2AuthorizationService implements OAuth2AuthorizationService 
     private Oauth2AuthorizationMapper authorizationRepository;
 
     @Autowired
-    private MyRegisteredClientRepository registeredClientRepository;
+    private MyOAuth2RegisteredClientRepository registeredClientRepository;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 

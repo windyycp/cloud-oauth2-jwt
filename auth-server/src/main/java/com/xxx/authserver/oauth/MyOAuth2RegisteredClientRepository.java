@@ -23,14 +23,14 @@ import java.time.Duration;
 import java.util.*;
 
 @Component
-public class MyRegisteredClientRepository implements RegisteredClientRepository {
+public class MyOAuth2RegisteredClientRepository implements RegisteredClientRepository {
 
     @Autowired
     private Oauth2RegisteredClientMapper repository;
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
-    public MyRegisteredClientRepository() {
+    public MyOAuth2RegisteredClientRepository() {
         this.objectMapper.registerModule(new JavaTimeModule());
     }
 

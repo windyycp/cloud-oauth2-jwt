@@ -39,5 +39,5 @@ logging:
   file:
     path: ${dir.logs}
   level:
-    root: INFO #TRACE
+    root: TRACE
 

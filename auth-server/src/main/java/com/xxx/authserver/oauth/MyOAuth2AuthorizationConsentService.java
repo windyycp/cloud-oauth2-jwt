@@ -25,7 +25,7 @@ public class MyOAuth2AuthorizationConsentService implements OAuth2AuthorizationC
     private Oauth2AuthorizationConsentMapper authorizationConsentRepository;
 
     @Autowired
-    private MyRegisteredClientRepository registeredClientRepository;
+    private MyOAuth2RegisteredClientRepository registeredClientRepository;
 
 
     @Override
