@@ -33,4 +33,4 @@ logging:
   file:
     path: ${dir.logs}
   level:
-    root: TRACE
+    root: INFO #TRACE
