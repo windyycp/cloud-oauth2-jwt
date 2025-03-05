@@ -2,6 +2,7 @@ package com.xxx.authcommon.util;
 
 import com.alibaba.fastjson2.JSON;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,6 +19,11 @@ public class ErrorUtil {
         Map<String, Object> error = new HashMap<>();
         error.put("code", e.getClass().getSimpleName());
         error.put("message", e.getMessage());
+
+        if (e instanceof OAuth2AuthenticationException ae) {
+            error.put("message", ae.getError().getDescription());
+        }
+
         try {
             response.getWriter().write(JSON.toJSONString(error));
         } catch (Exception ex) {
