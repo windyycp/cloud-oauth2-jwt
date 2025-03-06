@@ -1,19 +1,21 @@
 package com.xxx.authresource.web.controller;
 
+import com.xxx.authcommon.common.CommonR;
 import com.xxx.authcommon.component.RedisService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -34,7 +36,7 @@ public class Oauth2Controller {
     @Value("${spring.security.oauth2.resourceserver.jwt.issuer-uri}")
     private String oauth2ServerUri;
 
-    @RequestMapping("/login")
+    @GetMapping("/login")
     public RedirectView login(@RequestParam String client_id,
                               @RequestParam String redirect_uri,
                               @RequestParam String state) {
@@ -56,7 +58,7 @@ public class Oauth2Controller {
         return new RedirectView(loginUrl);
     }
 
-    @RequestMapping("/code/{uid}")
+    @GetMapping("/code/{uid}")
     public RedirectView token(@PathVariable String uid, @RequestParam String code) throws Exception {
 
         String clientId = "my-client";
@@ -96,6 +98,14 @@ public class Oauth2Controller {
 
         return new RedirectView(String.format("%s?access_token=%s&state=%s", clientUri, accessToken, state));
 
+    }
+
+    @GetMapping("/logout")
+    @ResponseBody
+    public CommonR logout(HttpServletRequest request, HttpServletResponse response) {
+        new SecurityContextLogoutHandler().logout(request, response, null);
+        String referer = request.getHeader("referer");
+        return CommonR.OK(oauth2ServerUri + "/signOut?redirectUri=" + referer);
     }
 
 }

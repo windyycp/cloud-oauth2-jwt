@@ -97,10 +97,10 @@ public class SecurityConfig {
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((auth) -> auth
                         .dispatcherTypeMatchers(FORWARD, ERROR).permitAll()
-                        .requestMatchers("/image/**", "/test/**", "/oauth2/**", "/login", "/favicon.ico").permitAll()
+                        .requestMatchers("/image/**", "/test/**", "/oauth2/**", "/login", "/signout", "/favicon.ico").permitAll()
                         .anyRequest().authenticated()
                 )
-                .formLogin(f -> f.loginPage("/login")) // 自定义登录页面
+                .formLogin(login -> login.loginPage("/login")) // 自定义登录页面
                 .csrf(csrf -> csrf.disable()) // 开启csrf防护
                 .cors(cors -> cors.configure(http)) // 开启跨域访问
 //                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // 无状态
