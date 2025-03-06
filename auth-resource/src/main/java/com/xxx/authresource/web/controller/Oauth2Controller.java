@@ -104,8 +104,9 @@ public class Oauth2Controller {
     @ResponseBody
     public CommonR logout(HttpServletRequest request, HttpServletResponse response) {
         new SecurityContextLogoutHandler().logout(request, response, null);
+        String token = request.getHeader("authorization").replaceAll("Bearer", "").trim();
         String referer = request.getHeader("referer");
-        return CommonR.OK(oauth2ServerUri + "/signOut?redirectUri=" + referer);
+        return CommonR.OK(String.format("%s/signOut?redirectUri=%s&accessToken=%s", oauth2ServerUri, referer, token));
     }
 
 }

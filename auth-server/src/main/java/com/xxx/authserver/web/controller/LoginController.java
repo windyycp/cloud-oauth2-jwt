@@ -36,14 +36,15 @@ public class LoginController {
      * @author yuchaopeng, 2025/3/6 下午6:14
      */
     @GetMapping("/signOut")
-    public RedirectView logout(HttpServletRequest request, HttpServletResponse response, @RequestParam String redirectUri) {
-        System.out.println(request.getHeader("authorization"));
+    public RedirectView logout(HttpServletRequest request, HttpServletResponse response,
+                               @RequestParam(required = false) String redirectUri,
+                               @RequestParam(required = false) String accessToken) {
+        System.out.println(accessToken);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null) {
             new SecurityContextLogoutHandler().logout(request, response, authentication);
         }
         return new RedirectView(redirectUri);
     }
-
 
 }
