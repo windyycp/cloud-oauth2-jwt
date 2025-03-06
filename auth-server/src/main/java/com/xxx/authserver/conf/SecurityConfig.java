@@ -59,8 +59,7 @@ public class SecurityConfig {
     @Order(1)
     public SecurityFilterChain authorizationServerSecurityFilterChain(HttpSecurity http,
                                                                       OAuth2AuthorizationService authorizationService,
-                                                                      OAuth2TokenGenerator<?> tokenGenerator
-    ) throws Exception {
+                                                                      OAuth2TokenGenerator<?> tokenGenerator) throws Exception {
         OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
 
         http.addFilterBefore(new MyExceptionFilter(), ExceptionTranslationFilter.class)
@@ -98,19 +97,17 @@ public class SecurityConfig {
     public SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((auth) -> auth
                         .dispatcherTypeMatchers(FORWARD, ERROR).permitAll()
-                        .requestMatchers("/test/**").permitAll()
-                        .requestMatchers("/oauth2/**").permitAll()
+                        .requestMatchers("/image/**", "/test/**", "/oauth2/**", "/login", "/favicon.ico").permitAll()
                         .anyRequest().authenticated()
                 )
-                .formLogin(Customizer.withDefaults())
-                .csrf(Customizer.withDefaults()) // 开启csrf防护
+                .formLogin(f -> f.loginPage("/login")) // 自定义登录页面
+                .csrf(csrf -> csrf.disable()) // 开启csrf防护
                 .cors(cors -> cors.configure(http)) // 开启跨域访问
 //                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // 无状态
         ;
 
         return http.build();
     }
-
 
     @Bean
     public PasswordEncoder passwordEncoder() {

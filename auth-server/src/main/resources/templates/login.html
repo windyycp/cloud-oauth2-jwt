@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: url('/image/bg1.png') no-repeat center center;
+            background-size: cover;
+            backdrop-filter: blur(5px);
+        }
+
+        .container {
+            display: flex;
+            width: 900px;
+            height: 500px;
+            background: rgba(255, 255, 255, 0.6);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+
+        .left-panel {
+            width: 50%;
+            background-image: url('/image/bg2.png');
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            text-align: center;
+            background-size: cover;
+            backdrop-filter: blur(5px);
+        }
+
+        .illustration img {
+            width: 80%;
+            max-width: 250px;
+        }
+
+        .right-panel {
+            width: 50%;
+            background-color: rgba(255, 255, 255, 0.6);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 40px;
+        }
+
+        .logo {
+            font-family: 'Cursive', sans-serif;
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+        h2 {
+            color: #777;
+            font-size: 18px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            max-width: 280px;
+        }
+
+        label {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            padding-left: 0px;
+            margin-top: 5px;
+            border: none;
+            border-bottom: 1px solid #ccc;
+            outline: none;
+            font-size: 14px;
+            background: transparent;
+        }
+
+        input::placeholder {
+            color: #bbb;
+            opacity: 1; /* 确保颜色生效 */
+        }
+
+
+        .forgot-password {
+            text-align: right;
+            font-size: 12px;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .sign-in {
+            width: 100%;
+            padding: 12px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 30px;
+            background-color: #555;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .sign-in:hover {
+            background-color: #333;
+        }
+
+        .google-sign-in {
+            padding: 10px;
+            margin-top: 0px;
+            border: none;
+            border-radius: 0px;
+            color: black;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .google-sign-in:hover {
+            background-color: #f8f8f8;
+        }
+
+        .google-sign-in img {
+            width: 18px;
+            margin-right: 8px;
+        }
+
+        p {
+            margin-top: 10px;
+            font-size: 14px;
+            color: #777;
+        }
+
+        a {
+            color: #333;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .register-user {
+            font-size: 12px;
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="container">
+
+    <div class="left-panel">
+        <div class="illustration">
+            <!-- <h2>1</h2>
+            <p>2</p> -->
+        </div>
+    </div>
+
+    <div class="right-panel">
+        <h1 class="logo">请登录</h1>
+        <h2>欢迎来到统一认证中心</h2>
+
+        <form action="/login" method="post">
+
+            <label for="username">用户名</label>
+            <input type="text" id="username" name="username" placeholder="请输入用户名">
+
+            <label for="password">密码</label>
+            <input type="password" id="password" name="password" placeholder="请输入密码">
+
+            <a href="#" class="forgot-password">忘记密码?</a>
+
+            <button type="submit" class="sign-in">登录</button>
+        </form>
+
+        <p>或</p>
+
+        <a class="google-sign-in">
+            <img src="/image/wx.png" alt="wechat">微信登录
+        </a>
+
+        <p class="register-user">新用户? <a href="#">点此注册</a></p>
+    </div>
+
+</div>
+
+</body>
+
+</html>
