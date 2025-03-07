@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
 @Controller
@@ -22,12 +23,14 @@ public class LoginController {
      * @author yuchaopeng, 2025/3/6 下午2:22
      */
     @GetMapping("/login")
-    public String login() {
-        return "login";
+    public ModelAndView login(HttpServletRequest request) {
+        ModelAndView model = new ModelAndView("login");
+        model.addObject("error", request.getSession().getAttribute("error"));
+        return model;
     }
 
     /**
-     * 自定义退出登录接口，并重定向来源地址
+     * 自定义退出登录，并重定向来源地址
      *
      * @param request
      * @param response
@@ -35,11 +38,10 @@ public class LoginController {
      * @return RedirectView
      * @author yuchaopeng, 2025/3/6 下午6:14
      */
-    @GetMapping("/signOut")
+    @GetMapping("/logout")
     public RedirectView logout(HttpServletRequest request, HttpServletResponse response,
                                @RequestParam(required = false) String redirectUri,
                                @RequestParam(required = false) String accessToken) {
-        System.out.println(accessToken);
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null) {
             new SecurityContextLogoutHandler().logout(request, response, authentication);

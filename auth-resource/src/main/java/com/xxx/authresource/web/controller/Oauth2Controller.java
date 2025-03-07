@@ -106,7 +106,7 @@ public class Oauth2Controller {
         new SecurityContextLogoutHandler().logout(request, response, null);
         String token = request.getHeader("authorization").replaceAll("Bearer", "").trim();
         String referer = request.getHeader("referer");
-        return CommonR.OK(String.format("%s/signOut?redirectUri=%s&accessToken=%s", oauth2ServerUri, referer, token));
+        return CommonR.OK(String.format("%s/logout?redirectUri=%s&accessToken=%s", oauth2ServerUri, referer, token));
     }
 
 }

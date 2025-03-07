@@ -24,7 +24,6 @@ public class SecurityConfig {
                         .jwt(Customizer.withDefaults())
                 )
                 .cors(cors -> cors.configure(http)) // 开启跨域访问
-
         ;
 
         return http.build();

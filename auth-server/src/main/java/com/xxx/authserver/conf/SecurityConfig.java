@@ -71,7 +71,6 @@ public class SecurityConfig {
                 .authenticationProvider(new MyAuthorizationCodeAuthenticationProvider(authorizationService, tokenGenerator))
                 .oauth2ResourceServer((resourceServer) -> resourceServer.jwt(Customizer.withDefaults()));
 
-
         // 处理端点认证失败
         http.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
                 .oidc(Customizer.withDefaults())
@@ -100,10 +99,10 @@ public class SecurityConfig {
                         .requestMatchers("/image/**", "/test/**", "/oauth2/**", "/favicon.ico").permitAll()
                         .anyRequest().authenticated()
                 )
-                .formLogin(login -> login.loginPage("/login").permitAll()) // 自定义登录页面
+                .formLogin(login -> login.loginPage("/login").permitAll().failureHandler(new MyAuthenticationFailureHandler())) // 自定义登录页面
+                .logout(logout -> logout.logoutUrl("/logout").permitAll().deleteCookies())
                 .csrf(csrf -> Customizer.withDefaults()) // 开启csrf防护
                 .cors(cors -> cors.configure(http)) // 开启跨域访问
-//                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // 无状态
         ;
 
         return http.build();
